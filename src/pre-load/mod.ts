@@ -14,7 +14,9 @@ const main = (url: string, dir: string): string => {
 let args: string[] = Deno.args.slice(1)
 
 if (args.length < 1) {
-  console.log("\nUsage: deno --allow-read --allow-net https://raw.githubusercontent.com/andares/djali/master/src/pre-load/mod.ts <url>\n")
+  console.log("\nUsage:")
+  console.log("\n      > Goto the project dir and run:")
+  console.log("\n      deno --allow-read --allow-net https://raw.githubusercontent.com/andares/djali/master/src/pre-load/mod.ts <url>")
   Deno.exit()
 }
 
