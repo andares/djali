@@ -1,2 +1,3 @@
 # djali
-a deno mini program for search dir and push to cdn pre-load.
+
+some tools built by deno.
