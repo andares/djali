@@ -5,7 +5,7 @@
 Without return value:
 
 ```javascript
-import { req } from "https://raw.githubusercontent.com/andares/vex/master/src/req/mod.ts"
+import { req } from "https://raw.githubusercontent.com/veeshan-io/djali/master/src/req/mod.ts"
 
 req({
   headers: {
@@ -25,7 +25,7 @@ req({
 With return value:
 
 ```javascript
-import { req } from "https://raw.githubusercontent.com/andares/vex/master/src/req/mod.ts"
+import { req } from "https://raw.githubusercontent.com/veeshan-io/djali/master/src/req/mod.ts"
 
 let prepared = req().
   post("https://deno.land/images/deno_logo_3.svg").
