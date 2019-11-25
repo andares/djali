@@ -1,5 +1,9 @@
 import Action from "./Action.ts"
 
+/**
+ * 路由控制器
+ * 目前仅以单例形式使用
+ */
 export default class Controller {
   private static _instance: Controller
 
@@ -11,11 +15,26 @@ export default class Controller {
   // ) {
   // }
 
+  /**
+   * 获取单例
+   *
+   * @readonly
+   * @static
+   * @type {Controller}
+   * @memberof Controller
+   */
   static get instance(): Controller {
     !this._instance && (this._instance = new Controller())
     return this._instance
   }
 
+  /**
+   * 绑定 Action
+   *
+   * @param {Action} action
+   * @returns {Action}
+   * @memberof Controller
+   */
   attach(action: Action): Action {
     let cursor = this.attached
     for (let node of action.name.split(":")) {
@@ -29,6 +48,13 @@ export default class Controller {
     return action
   }
 
+  /**
+   * 根据名字获取一个 Action
+   *
+   * @param {string} name
+   * @returns {(Action | undefined)}
+   * @memberof Controller
+   */
   select(name: string): Action | undefined {
     let cursor = this.attached
     for (let node of name.split(":")) {
@@ -38,13 +64,16 @@ export default class Controller {
       cursor = cursor[node]
     }
 
-    if (cursor["_action"] == undefined) {
-      return undefined
-    }
-
     return cursor["_action"]
   }
 
+  /**
+   * 执行一个指令
+   *
+   * @param {string[]} params
+   * @param {(status: boolean, result: any) => void} [callback]
+   * @memberof Controller
+   */
   resolve(
     params: string[],
     callback?: (status: boolean, result: any) => void
@@ -55,6 +84,9 @@ export default class Controller {
     }
 
     let action = this.select(name)
+    if (!action) {
+      throw new Error(`Action [${name}] is not attached.`)
+    }
     let result = action.call(params.slice(1))
     callback && callback(...result)
   }

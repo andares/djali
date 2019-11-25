@@ -13,9 +13,20 @@ import {
 
 import { act } from "./mod.ts"
 
+// prepare base cmd
+
+act("test:cmd1")
+  .argument("name", null, "Enter name")
+  .argument("value", "", "Enter value")
+  .option("", "", "description")
+  .option("-opt", "default", "description")
+  .main((params) => {
+    console.log(params)
+  })
+
+
 test({
-  name: "base act",
-  // async fn(): Promise<void> {
+  name: "call action",
   fn() {
     // act("abc")
     // act("abc:ddee")
@@ -23,19 +34,32 @@ test({
     // console.log(act().controller.select("ade"))
     // console.log(act().controller.select("abc:ddee"))
 
-    act("my:test")
-      .argument("arg1", null, "description")
-      .argument("arg2", "", "description")
-      .option("a", "", "description")
-      .option("opt", "default", "description")
-      .main((params) => {
-        console.log(params)
-      })
 
     act().main((params: object) => {
-    }).run(['help'])
-    // }).run(Deno.args.slice(1))
+    // }).run(['help'])
+    }).run(Deno.args.slice(1))
 
+    assert(true)
+  }
+})
+
+test({
+  name: "get help",
+  fn() {
+    assert(true)
+  }
+})
+
+test({
+  name: "get action help",
+  fn() {
+    assert(true)
+  }
+})
+
+test({
+  name: "custom guard",
+  fn() {
     assert(true)
   }
 })
